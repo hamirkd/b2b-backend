@@ -1,0 +1,16 @@
+package com.b2b.b2b.services;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.b2b.b2b.models.Evenement;
+@Service
+public interface EvenementService {
+	
+	List<Evenement> findAll();
+	Evenement findById(String id);
+	Evenement add(Evenement t);
+	Evenement update(Evenement t);
+	void deleteById(String id);
+}
