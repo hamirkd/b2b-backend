@@ -12,7 +12,7 @@ import lombok.Data;
 public class RendezVous {
 	@Id
 	  private String id;
-	  private String table;
+	  private String numeroTable;
 	  private int duree;//en minute
 	  private LocalDateTime dateDebut;
 	  private LocalDateTime dateFin;

@@ -13,6 +13,7 @@ public class Pays {
 	@Id
 	  private String id;
 	  private String nom;
+	private String code;
 	  private LocalDateTime dateCreation;
 	  private LocalDateTime dateModification;
 }
