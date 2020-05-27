@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.b2b.b2b.menum.TypeNombreParticipant;
+
 import lombok.Data;
 
 @Document(collection = "evenements")
@@ -16,6 +18,8 @@ public class Evenement {
 	  private String id;
 	  private String titre;
 	  private String description;
+	  private TypeNombreParticipant nombreParticipant=TypeNombreParticipant.ILIMITE;
+	  private int nombre;
 	  private LocalDateTime dateDebut;
 	  private LocalDateTime dateFin;
 	  private LocalDateTime dateCreation;

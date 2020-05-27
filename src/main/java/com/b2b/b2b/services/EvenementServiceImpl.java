@@ -1,5 +1,6 @@
 package com.b2b.b2b.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,14 @@ public class EvenementServiceImpl implements EvenementService{
 
 	@Override
 	public Evenement add(Evenement t) {
-		
+		t.setDateCreation(LocalDateTime.now());
+		t.setDateModification(LocalDateTime.now());
 		return evenementRepository.save(t);
 	}
 
 	@Override
 	public Evenement update(Evenement t) {
-		
+		t.setDateModification(LocalDateTime.now());
 		return evenementRepository.save(t);
 	}
 

@@ -3,11 +3,14 @@ package com.b2b.b2b.controllers;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,8 +66,8 @@ public class EvenementController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Item deleted"),
 			@ApiResponse(code = 400, message = "Bad Request"),
 	})
-	@DeleteMapping("/")
-	  public void delete(@Valid @RequestBody String id) {
+	@DeleteMapping("/{id}")
+	  public void delete(@PathVariable("id") String id) {
 		evenementService.deleteById(id);
 	  }	
 	
