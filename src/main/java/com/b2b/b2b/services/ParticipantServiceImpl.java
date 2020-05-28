@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.b2b.b2b.dto.CompetenceDto;
 import com.b2b.b2b.dto.ParticipantDto;
+import com.b2b.b2b.menum.TypeProfil;
 import com.b2b.b2b.models.Participant;
 import com.b2b.b2b.models.Utilisateur;
 import com.b2b.b2b.repositories.ParticipantRepository;
@@ -59,7 +60,6 @@ public class ParticipantServiceImpl implements ParticipantService{
 			for(CompetenceDto c:t.getCompetences()) {
 				p.getCompetences().add(competenceService.findById(c.getId()));
 			}
-			utilisateurRepository.save(p);
 			return participantRepository.save(p);
 		}
 		return null;
@@ -69,19 +69,52 @@ public class ParticipantServiceImpl implements ParticipantService{
 	public Participant add(Participant t) {
 		if(this.utilisateurRepository.findByLogin(t.getLogin())==null)
 		{
-			return participantRepository.save(t);
+			Utilisateur u = new Utilisateur();
+			u.setLogin(t.getLogin());
+			u.setPassword(t.getPassword());
+			u.setProfil(t.getProfil());
+			u.setNom(t.getNom());
+
+			if(t.getProfil()==TypeProfil.PARTICIPANT) {
+			utilisateurRepository.save(u);
+			return participantRepository.save(t);}
+			else utilisateurRepository.save(u);
 		}
 		return null;
 	}
 
 	@Override
 	public Participant update(Participant t) {
-		//Utilisateur u=this.utilisateurRepository.findByLogin(t.getLogin());
-		//if(u==null||u.getId()==t.getId())
-		//{
+		Utilisateur u=this.utilisateurRepository.findByLogin(t.getLogin());
+		if(u==null||u.getId()==t.getId())
+		{
 			return participantRepository.save(t);
-		//}
-		//return null;
+		}
+		return null;
+	}
+	@Override
+	public Utilisateur login(Participant t) {
+		for(Utilisateur u:utilisateurRepository.findAll()) {
+			if(u.getPassword().compareTo(t.getPassword())==0&&u.getLogin().compareToIgnoreCase(t.getLogin())==0)
+				return u;
+		}
+		return null;
+	}
+	@Override
+	public Participant findByLogin(Participant t) {
+		for(Participant u:participantRepository.findAll()) {
+			if(u.getLogin().compareToIgnoreCase(t.getLogin())==0)
+				return u;
+		}
+		return null;
+	}
+	@Override
+	public Participant findByLogin(String t) {
+		for(Participant u:participantRepository.findAll()) {
+			if(u.getLogin().compareToIgnoreCase(t)==0)
+				return u;
+		}
+		return null;
 	}
 
 	@Override

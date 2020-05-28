@@ -23,6 +23,6 @@ public class Utilisateur {
 	  private TypeProfil profil;
 	  private String nom;
 	@CreatedDate
-	  private LocalDateTime dateCreation;
-	  private LocalDateTime dateModification;
+	  private LocalDateTime dateCreation=LocalDateTime.now();
+	  private LocalDateTime dateModification=LocalDateTime.now();
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.b2b.b2b.models.Evenement;
+import com.b2b.b2b.models.Participant;
 @Service
 public interface EvenementService {
 	
@@ -13,4 +14,5 @@ public interface EvenementService {
 	Evenement add(Evenement t);
 	Evenement update(Evenement t);
 	void deleteById(String id);
+	public Evenement addOrDeleteParticipant(String id,String login);
 }

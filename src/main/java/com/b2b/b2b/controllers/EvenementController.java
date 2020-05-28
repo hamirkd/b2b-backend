@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.b2b.b2b.dto.EvenementDto;
 import com.b2b.b2b.models.Evenement;
 import com.b2b.b2b.services.EvenementService;
 
@@ -51,6 +52,15 @@ public class EvenementController {
 	@PostMapping("/")
 	  public Evenement add(@Valid @RequestBody Evenement evenement) {
 		return evenementService.add(evenement);
+	  }	
+	
+	@ApiOperation(value = "Ajouter ou supprimer un participant", notes = "", tags = { "", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Item updated"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+	})
+	@PostMapping("/addp")
+	  public Evenement addOrDeleteParticipant(@Valid @RequestBody EvenementDto evenement) {
+		return evenementService.addOrDeleteParticipant(evenement.getId(), evenement.getLogin());
 	  }	
 
 	@ApiOperation(value = "Modifier un evenement", notes = "", tags = { "", })

@@ -1,18 +1,22 @@
 package com.b2b.b2b.services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.b2b.b2b.models.Evenement;
+import com.b2b.b2b.models.Participant;
 import com.b2b.b2b.repositories.EvenementRepository;
 
 @Service
 public class EvenementServiceImpl implements EvenementService{
 	@Autowired
 	  EvenementRepository evenementRepository;
+	@Autowired
+	ParticipantService participantService;
 
 	@Override
 	public List<Evenement> findAll() {
@@ -37,6 +41,24 @@ public class EvenementServiceImpl implements EvenementService{
 	public Evenement update(Evenement t) {
 		t.setDateModification(LocalDateTime.now());
 		return evenementRepository.save(t);
+	}
+
+	public Evenement addOrDeleteParticipant(String id,String login) {
+		
+		Evenement e=findById(id);
+		e.setDateModification(LocalDateTime.now());
+		Participant p=participantService.findByLogin(login);
+		if(e.getParticipants().isEmpty()) {
+			e.setParticipants(new ArrayList<Participant>());
+			e.getParticipants().add(p);
+		}
+		else if(e.getParticipants().contains(p)){
+			e.getParticipants().remove(p);
+		}
+		else {
+			e.getParticipants().add(p);
+		}
+		return evenementRepository.save(e);
 	}
 
 	@Override
