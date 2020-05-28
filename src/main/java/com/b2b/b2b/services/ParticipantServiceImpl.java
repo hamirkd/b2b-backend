@@ -1,10 +1,13 @@
 package com.b2b.b2b.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.b2b.b2b.dto.CompetenceDto;
+import com.b2b.b2b.dto.ParticipantDto;
 import com.b2b.b2b.models.Participant;
 import com.b2b.b2b.models.Utilisateur;
 import com.b2b.b2b.repositories.ParticipantRepository;
@@ -16,6 +19,11 @@ public class ParticipantServiceImpl implements ParticipantService{
 	ParticipantRepository participantRepository;
 	@Autowired
 	UtilisateurRepository utilisateurRepository;
+	@Autowired
+	CompetenceService competenceService;
+	@Autowired
+	PaysService paysService;
+	
 
 	@Override
 	public List<Participant> findAll() {
@@ -27,6 +35,34 @@ public class ParticipantServiceImpl implements ParticipantService{
 	public Participant findById(String id) {
 		
 		return participantRepository.findById(id).get();
+	}
+
+	@Override
+	public Participant add(ParticipantDto t) {
+		if(this.utilisateurRepository.findByLogin(t.getLogin())==null)
+		{
+			Participant p=new Participant();
+			p.setEmail(t.getEmail());
+			p.setLogin(t.getLogin());
+			p.setPassword(t.getPassword());
+			p.setNom(t.getNom());
+			p.setPrenom(t.getPrenom());
+			p.setFonction(t.getFonction());
+			p.setTelephone(t.getTelephone());
+			p.setTelephonePortable(t.getTelephonePortable());
+			p.setEtatCivil(t.getEtatCivil());
+			p.setActiverPlanning(t.isActiverPlanning());
+			if(t.getPays()!=null) {
+				p.setPays(paysService.findById(t.getPays().getId()));
+			}
+			p.setCompetences(new ArrayList());
+			for(CompetenceDto c:t.getCompetences()) {
+				p.getCompetences().add(competenceService.findById(c.getId()));
+			}
+			
+			return participantRepository.save(p);
+		}
+		return null;
 	}
 
 	@Override
