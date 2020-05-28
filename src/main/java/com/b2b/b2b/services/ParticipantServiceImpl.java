@@ -59,7 +59,7 @@ public class ParticipantServiceImpl implements ParticipantService{
 			for(CompetenceDto c:t.getCompetences()) {
 				p.getCompetences().add(competenceService.findById(c.getId()));
 			}
-			
+			utilisateurRepository.save(p);
 			return participantRepository.save(p);
 		}
 		return null;
