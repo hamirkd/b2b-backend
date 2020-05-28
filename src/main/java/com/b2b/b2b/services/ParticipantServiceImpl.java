@@ -85,13 +85,9 @@ public class ParticipantServiceImpl implements ParticipantService{
 
 	@Override
 	public Participant update(Participant t) {
-		Utilisateur u=this.utilisateurRepository.findByLogin(t.getLogin());
-		if(u==null||u.getId()==t.getId())
-		{
 			return participantRepository.save(t);
-		}
-		return null;
 	}
+	
 	@Override
 	public Utilisateur login(Participant t) {
 		for(Utilisateur u:utilisateurRepository.findAll()) {
