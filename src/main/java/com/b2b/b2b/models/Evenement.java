@@ -25,5 +25,5 @@ public class Evenement {
 	  private LocalDateTime dateCreation;
 	  private LocalDateTime dateModification;
 	  private List<Competence>competences=new ArrayList<>();
-	  private List<Participant>participants=new ArrayList<>();
+	  private List<Participant>participants;
 }

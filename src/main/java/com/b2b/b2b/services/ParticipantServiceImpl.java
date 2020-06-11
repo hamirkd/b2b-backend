@@ -2,6 +2,7 @@ package com.b2b.b2b.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,9 +34,10 @@ public class ParticipantServiceImpl implements ParticipantService{
 	}
 
 	@Override
-	public Participant findById(String id) {
-		
-		return participantRepository.findById(id).get();
+	public Participant findById(String id) throws Exception {
+		Optional<Participant> p=participantRepository.findById(id);
+		if(p.isPresent())return p.get();
+		throw new Exception("Ce participant n'existe pas");
 	}
 
 	@Override
@@ -74,6 +76,7 @@ public class ParticipantServiceImpl implements ParticipantService{
 			u.setPassword(t.getPassword());
 			u.setProfil(t.getProfil());
 			u.setNom(t.getNom());
+			u.setEmail(t.getEmail());
 
 			if(t.getProfil()==TypeProfil.PARTICIPANT) {
 			utilisateurRepository.save(u);
@@ -89,10 +92,14 @@ public class ParticipantServiceImpl implements ParticipantService{
 	}
 	
 	@Override
-	public Utilisateur login(Participant t) {
+	public Utilisateur login(Participant t) throws Exception {
 		for(Utilisateur u:utilisateurRepository.findAll()) {
-			if(u.getPassword().compareTo(t.getPassword())==0&&u.getLogin().compareToIgnoreCase(t.getLogin())==0)
+			if(u.getPassword().compareTo(t.getPassword())==0&&u.getLogin().compareToIgnoreCase(t.getLogin())==0) {
+				if(!u.isStatus()) {
+					throw new Exception("COMPTE-PAS-ACTIF");
+				}
 				return u;
+			}
 		}
 		return null;
 	}
@@ -104,6 +111,7 @@ public class ParticipantServiceImpl implements ParticipantService{
 		}
 		return null;
 	}
+	
 	@Override
 	public Participant findByLogin(String t) {
 		for(Participant u:participantRepository.findAll()) {

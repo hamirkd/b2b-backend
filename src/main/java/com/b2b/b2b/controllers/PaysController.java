@@ -1,5 +1,6 @@
 package com.b2b.b2b.controllers;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -48,7 +49,19 @@ public class PaysController {
 	@PostMapping("/")
 	  public Pays add(@Valid @RequestBody Pays pays) {
 		return paysService.add(pays);
-	  }	
+	 }	
+	
+
+	@ApiOperation(value = "Ajouter beaucoup de pays", notes = "", tags = { "", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Items added"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+	})
+	@PostMapping("/many")
+	  public void addMany(@Valid @RequestBody List<Pays> pays) {
+		for (Pays pays2 : pays) {
+			paysService.add(pays2);
+		}
+	 }	
 
 	@ApiOperation(value = "Modifier un pays", notes = "", tags = { "", })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Item updated"),

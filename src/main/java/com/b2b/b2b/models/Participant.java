@@ -15,7 +15,6 @@ public class Participant extends Utilisateur{
 
 	  private String prenom;
 	  private String fonction;
-	  private String email;
 	  private String telephone;
 	  private String telephonePortable;
 	  private TypeEtatCivil etatCivil=TypeEtatCivil.M;
@@ -30,6 +29,5 @@ public class Participant extends Utilisateur{
 	  private List<Notification>notifications;
 	  @DBRef
 	  private List<RendezVous>rendezVous;
-	private boolean status=false;
 	  
 }

@@ -58,7 +58,7 @@ public class ParticipantController {
 			@ApiResponse(code = 400, message = "Bad Request"),
 	})
 	@PostMapping("/login")
-	  public Utilisateur login(@Valid @RequestBody Participant participant) {
+	  public Utilisateur login(@Valid @RequestBody Participant participant) throws Exception {
 		Utilisateur utilisateur=participantService.login(participant);
 		return utilisateur;
 	  }	
@@ -88,6 +88,15 @@ public class ParticipantController {
 	@DeleteMapping("/{id}")
 	  public void delete(@PathVariable("id") String id) {
 		participantService.deleteById(id);
+	  }	
+
+	@ApiOperation(value = "Récupérer un participant", notes = "", tags = { "", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Item getted"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+	})
+	@GetMapping("/{id}")
+	  public Participant getById(@PathVariable("id") String id) throws Exception {
+		return participantService.findById(id);
 	  }	
 	
 }

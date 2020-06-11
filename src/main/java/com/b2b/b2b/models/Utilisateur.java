@@ -17,12 +17,13 @@ import lombok.Data;
 public class Utilisateur {
 	@Id
 	  private String id;
-		@Indexed(unique=true)
 	  private String login;
+	  private String email;
 	  private String password;
 	  private TypeProfil profil;
 	  private String nom;
 	@CreatedDate
 	  private LocalDateTime dateCreation=LocalDateTime.now();
 	  private LocalDateTime dateModification=LocalDateTime.now();
+	  private boolean status=false;
 }

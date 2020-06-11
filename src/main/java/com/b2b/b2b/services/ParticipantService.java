@@ -11,10 +11,10 @@ import com.b2b.b2b.models.Utilisateur;
 public interface ParticipantService {
 	
 	List<Participant> findAll();
-	Participant findById(String id);
+	Participant findById(String id) throws Exception;
 	Participant add(ParticipantDto t);
 	Participant add(Participant t);
-	Utilisateur login(Participant t);
+	Utilisateur login(Participant t) throws Exception;
 	Participant findByLogin(Participant t);
 	Participant findByLogin(String t);
 	Participant update(Participant t);
