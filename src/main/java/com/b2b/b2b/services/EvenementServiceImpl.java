@@ -67,4 +67,16 @@ public class EvenementServiceImpl implements EvenementService{
 		evenementRepository.deleteById(id);
 	}
 	
+	@Override
+	public List<Evenement> findEvenementByParticipant(String participantId) {
+		List<Evenement>evenements = evenementRepository.findAll();
+		List<Evenement> bonListe = new ArrayList<>();
+		for (Evenement evenement : evenements) {
+			for (Participant participant : evenement.getParticipants()) {
+				if(participant.getId().compareToIgnoreCase(participantId)==0)bonListe.add(evenement);break;
+			}
+		}
+		return bonListe;
+	}
+	
 }

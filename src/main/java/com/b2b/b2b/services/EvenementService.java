@@ -15,4 +15,5 @@ public interface EvenementService {
 	Evenement update(Evenement t);
 	void deleteById(String id);
 	public Evenement addOrDeleteParticipant(String id,String login);
+	List<Evenement> findEvenementByParticipant(String participantId);
 }

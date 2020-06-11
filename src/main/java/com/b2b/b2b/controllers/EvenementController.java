@@ -81,4 +81,15 @@ public class EvenementController {
 		evenementService.deleteById(id);
 	  }	
 	
+
+
+	@ApiOperation(value = "Récuperer la liste des evenements à la quelle participe un utilisateur", notes = "", tags = { "", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Items getted"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+	})
+	@GetMapping("/findByParticipant/{participantId}")
+	  public List<Evenement> findEvenementByParticipant(@PathVariable("participantId") String participantId) {
+		return evenementService.findEvenementByParticipant(participantId);
+	  }	
+	
 }
