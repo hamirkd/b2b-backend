@@ -88,6 +88,10 @@ public class ParticipantServiceImpl implements ParticipantService{
 
 	@Override
 	public Participant update(Participant t) {
+		Utilisateur u = utilisateurRepository.findByLogin(t.getLogin());
+		if(u!=null) {
+		u.setStatus(t.isStatus());
+		utilisateurRepository.save(u);}
 			return participantRepository.save(t);
 	}
 	
@@ -95,6 +99,7 @@ public class ParticipantServiceImpl implements ParticipantService{
 	public Utilisateur login(Participant t) throws Exception {
 		for(Utilisateur u:utilisateurRepository.findAll()) {
 			if(u.getPassword().compareTo(t.getPassword())==0&&u.getLogin().compareToIgnoreCase(t.getLogin())==0) {
+				System.out.println(u);
 				if(!u.isStatus()) {
 					throw new Exception("COMPTE-PAS-ACTIF");
 				}
