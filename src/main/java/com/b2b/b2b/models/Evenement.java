@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.b2b.b2b.menum.TypeNombreParticipant;
@@ -24,6 +25,7 @@ public class Evenement {
 	  private LocalDateTime dateFin;
 	  private LocalDateTime dateCreation;
 	  private LocalDateTime dateModification;
+	  @DBRef
 	  private List<Competence>competences=new ArrayList<>();
 	  private List<Participant>participants;
 }

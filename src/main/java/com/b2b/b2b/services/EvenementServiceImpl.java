@@ -48,6 +48,7 @@ public class EvenementServiceImpl implements EvenementService{
 		Evenement e=findById(id);
 		e.setDateModification(LocalDateTime.now());
 		Participant p=participantService.findByLogin(login);
+		p.setLogin(null);
 		if(e.getParticipants().isEmpty()) {
 			e.setParticipants(new ArrayList<Participant>());
 			e.getParticipants().add(p);
@@ -73,7 +74,7 @@ public class EvenementServiceImpl implements EvenementService{
 		List<Evenement> bonListe = new ArrayList<>();
 		for (Evenement evenement : evenements) {
 			for (Participant participant : evenement.getParticipants()) {
-				if(participant.getId().compareToIgnoreCase(participantId)==0)bonListe.add(evenement);break;
+				if(participant.getId().compareToIgnoreCase(participantId)==0) {bonListe.add(evenement);break;}
 			}
 		}
 		return bonListe;
