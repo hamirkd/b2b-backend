@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.b2b.b2b.models.Langue;
 import com.b2b.b2b.repositories.LangueRepository;
+
 @Service
 public class LangueServiceImpl implements LangueService{
 	@Autowired
@@ -19,5 +20,24 @@ public class LangueServiceImpl implements LangueService{
 	@Override
 	public Langue findById(String id) {
 		return langueRepository.findById(id).get();
+	}
+
+
+	@Override
+	public Langue add(Langue t) {
+		
+		return langueRepository.save(t);
+	}
+
+	@Override
+	public Langue update(Langue t) {
+		
+		return langueRepository.save(t);
+	}
+
+	@Override
+	public void deleteById(String id) {
+		
+		langueRepository.deleteById(id);
 	}
 }

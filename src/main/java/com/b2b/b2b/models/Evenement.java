@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -27,5 +28,9 @@ public class Evenement {
 	  private LocalDateTime dateModification;
 	  @DBRef
 	  private List<Competence>competences=new ArrayList<>();
+	  @DBRef
+	  private List<Langue>langues=new ArrayList<>();
+	  @DBRef
+	  @Indexed(unique=false)
 	  private List<Participant>participants;
 }

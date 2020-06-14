@@ -34,6 +34,7 @@ public class EvenementServiceImpl implements EvenementService{
 	public Evenement add(Evenement t) {
 		t.setDateCreation(LocalDateTime.now());
 		t.setDateModification(LocalDateTime.now());
+		t.setParticipants(new ArrayList<>());
 		return evenementRepository.save(t);
 	}
 
@@ -47,6 +48,7 @@ public class EvenementServiceImpl implements EvenementService{
 		
 		Evenement e=findById(id);
 		e.setDateModification(LocalDateTime.now());
+		System.out.println(login);
 		Participant p=participantService.findByLogin(login);
 		p.setLogin(null);
 		if(e.getParticipants().isEmpty()) {

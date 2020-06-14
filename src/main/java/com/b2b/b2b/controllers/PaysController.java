@@ -1,6 +1,5 @@
 package com.b2b.b2b.controllers;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;

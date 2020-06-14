@@ -28,5 +28,6 @@ public class RendezVous {
 	  private Participant participant2;
 	  @DBRef
 	  private Evenement Evenement;
+	  private Boolean annuler;
 	  
 }

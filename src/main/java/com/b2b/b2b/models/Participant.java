@@ -28,6 +28,6 @@ public class Participant extends Utilisateur{
 	  @DBRef
 	  private List<Notification>notifications;
 	  @DBRef
-	  private List<RendezVous>rendezVous;
+	  private List<Langue>langues;
 	  
 }

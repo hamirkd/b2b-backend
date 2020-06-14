@@ -17,6 +17,6 @@ public interface ParticipantService {
 	Utilisateur login(Participant t) throws Exception;
 	Participant findByLogin(Participant t);
 	Participant findByLogin(String t);
-	Participant update(Participant t);
+	Utilisateur update(Participant t);
 	void deleteById(String id);
 }

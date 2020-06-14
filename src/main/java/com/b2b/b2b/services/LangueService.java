@@ -9,4 +9,7 @@ import com.b2b.b2b.models.Langue;
 public interface LangueService {
 	List<Langue> findAllLangue();
 	Langue findById(String id);
+	Langue add(Langue t);
+	Langue update(Langue t);
+	void deleteById(String id);
 }

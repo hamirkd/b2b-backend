@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.b2b.b2b.dto.ParticipantDto;
 import com.b2b.b2b.models.Participant;
 import com.b2b.b2b.models.Utilisateur;
 import com.b2b.b2b.services.ParticipantService;
@@ -77,7 +76,7 @@ public class ParticipantController {
 			@ApiResponse(code = 400, message = "Bad Request"),
 	})
 	@PutMapping("/")
-	  public Participant update(@Valid @RequestBody Participant participant) {
+	  public Utilisateur update(@Valid @RequestBody Participant participant) {
 		return participantService.update(participant);
 	  }	
 

@@ -2,10 +2,6 @@ package com.b2b.b2b.dto;
 
 import java.util.List;
 
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.b2b.b2b.menum.TypeEtatCivil;
 import com.b2b.b2b.menum.TypeProfil;
 

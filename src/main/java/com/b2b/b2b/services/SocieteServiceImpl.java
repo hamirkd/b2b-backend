@@ -1,5 +1,6 @@
 package com.b2b.b2b.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,16 @@ public class SocieteServiceImpl implements SocieteService{
 
 	@Override
 	public Societe add(Societe t) {
-		
+		if(t.getId()==null) {
+			t.setDateCreation(LocalDateTime.now());
+		}
+		t.setDateModification(LocalDateTime.now());
 		return societeRepository.save(t);
 	}
 
 	@Override
 	public Societe update(Societe t) {
-		
+		t.setDateModification(LocalDateTime.now());
 		return societeRepository.save(t);
 	}
 
